@@ -1,4 +1,4 @@
-package com.gsj.www;
+package com.gsj.www.algorithm;
 
 /**
  * twitter的snowflake算法 -- java实现
