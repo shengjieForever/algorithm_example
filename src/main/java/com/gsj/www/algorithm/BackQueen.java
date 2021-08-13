@@ -1,12 +1,13 @@
 package com.gsj.www.algorithm;
 
 /**
+ * 八皇后排列算法-普通写法
  * @author gongshengjie
  * @Date 8/5/21 3:41 PM
  */
 public class BackQueen {
     public static void main(String[] args) {
-        new BackQueen().placeQueens(5);
+        new BackQueen().placeQueens(8);
     }
 
     /**

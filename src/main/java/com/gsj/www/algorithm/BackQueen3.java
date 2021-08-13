@@ -1,13 +1,13 @@
 package com.gsj.www.algorithm;
 
 /**
- * 皇后摆放算法
+ * 八皇后排列算法-汇编语言的写法
  * @author gongshengjie
  * @Date 8/5/21 3:41 PM
  */
-public class BackQueen2 {
+public class BackQueen3 {
     public static void main(String[] args) {
-        new BackQueen2().placeQueens(4);
+        new BackQueen3().place8Queens();
     }
 
     /**
@@ -18,31 +18,27 @@ public class BackQueen2 {
     /**
      * 标记着某一列是否有皇后
      */
-    boolean[] cols;
+    byte cols;
 
     /**
      * 标记着某一斜线上是否有皇后（左上角 --> 到右下角）
      */
-    boolean[] leftTop;
+    short leftTop;
 
     /**
      * 标记着某一斜线上是否有皇后（右上角 --> 到左下角）
      */
-    boolean[] rightTop;
+    short rightTop;
 
     /**
      * 一共有多少种摆法
      */
     int ways;
 
-    void placeQueens(int n){
-        if(n < 1) return;
-        queens = new int[n];
-        cols = new boolean[n];
-        leftTop = new boolean[(n << 1) - 1];
-        rightTop = new boolean[leftTop.length];
+    void place8Queens(){
+        queens = new int[8];
         place(0);
-        System.out.println(n + "皇后一共有" + ways +"种摆法");
+        System.out.println("八皇后一共有" + ways +"种摆法");
     }
 
     /**
@@ -50,34 +46,38 @@ public class BackQueen2 {
      * @param row
      */
     void place(int row) {
-        if(row == cols.length){
+        if(row == 8){
             ways ++;
             show();
             return;
         }
 
-        //TODO 这个写法暂时还有点问题
-        for (int col = 0; col < cols.length; col ++){
-            if(cols[col]) continue;
-            int ltIndex = row - col + cols.length - 1;
-            if(leftTop[ltIndex]) continue;
-            int rtIndex = row + col;
-            if(rightTop[rtIndex]) continue;
+        for (int col = 0; col < 8; col ++){
+            int cv = 1 << col;
+            if((cols & cv) != 0) continue;
+
+            int lv = 1 << (row - col + 8 - 1);
+            if((leftTop & lv) != 0) continue;
+
+            int rv = 1 << (row + col);
+            if((rightTop & rv) != 0) continue;
 
             queens[row] = col;
-            cols[row] = true;
-            leftTop[ltIndex] = true;
-            rightTop[rtIndex] = true;
+            //"｜="和"&=" 的计算方式类似"+="，即做完两字段"|"或者"&"操作后在赋值给前者
+            cols |= cv;
+            leftTop |= lv;
+            rightTop |= rv;
             place(row + 1);
-            cols[col] = false;
-            leftTop[ltIndex] = false;
-            rightTop[rtIndex] = false;
+            //"&= ~" 就是把~后面的数值取反,然后和&=前的变量做与操作
+            cols &= ~cv;
+            leftTop &= ~lv;
+            rightTop &= ~rv;
         }
     }
 
     void show(){
-        for (int row = 0; row < cols.length; row ++){
-            for (int col = 0; col < cols.length; col ++){
+        for (int row = 0; row < 8; row ++){
+            for (int col = 0; col < 8; col ++){
                 if(queens[row] == col){
                     System.out.print("1 ");
                 }else {
