@@ -1,4 +1,4 @@
-package com.gsj.www.algorithm;
+package com.gsj.www.algorithm.tanxin;
 
 import java.util.Arrays;
 

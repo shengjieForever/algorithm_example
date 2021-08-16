@@ -1,4 +1,4 @@
-package com.gsj.www.algorithm;
+package com.gsj.www.algorithm.huisu;
 
 /**
  * 八皇后排列算法-汇编语言的写法

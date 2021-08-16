@@ -1,4 +1,4 @@
-package com.gsj.www.algorithm;
+package com.gsj.www.algorithm.huisu;
 
 /**
  * 皇后摆放算法

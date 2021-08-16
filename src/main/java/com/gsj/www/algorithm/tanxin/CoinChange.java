@@ -1,9 +1,9 @@
-package com.gsj.www.algorithm;
+package com.gsj.www.algorithm.tanxin;
 
 import java.util.Arrays;
 
 /**
- * 贪心算法-零钱兑换
+ * 贪心算法-零钱兑换--不一定是最优解哦，因为不会尝试所有可能的算法，只贪图眼前的利益
  * @author gongshengjie
  * @Date 8/13/21 3:25 PM
  */
